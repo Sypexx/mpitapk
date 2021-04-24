@@ -16,9 +16,9 @@ final passwordController = TextEditingController();
 void Auth(BuildContext context) async {
   String email1 = emailController.text;
   String pass1 = passwordController.text;
-  var url = Uri.parse('https://herokuapp.com/users/login');
+  var url = Uri.parse('https://mpitback.herokuapp.com/users/authenticate');
   var response =
-      await http.post(url, body: {'email': '$email1', 'password': '$pass1'});
+      await http.post(url, body: {'username': '$email1', 'password': '$pass1'});
   print('Response status: ${response.statusCode}');
   print('Response body: ${response.body}');
 

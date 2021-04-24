@@ -18,9 +18,9 @@ void Registration(BuildContext context) async {
   String name1 = nameController.text;
   String email1 = emailController.text;
   String pass1 = passwordController.text;
-  var url = Uri.parse('https://tutycashapi.herokuapp.com/users');
+  var url = Uri.parse('https://mpitback.herokuapp.com/users/register');
   var response = await http.post(url,
-      body: {'name': '$name1', 'email': '$email1', 'password': '$pass1'});
+      body: {'firstName': '$name1', 'username': '$email1', 'password': '$pass1', 'lastName': 'lalka'});
   print('Response status: ${response.statusCode}');
   print('Response body: ${response.body}');
 

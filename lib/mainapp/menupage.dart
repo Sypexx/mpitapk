@@ -1,7 +1,19 @@
-//import 'package:dollar/game/newgame.dart';
-//import 'package:dollar/mainapp/drawer/profile.dart';
 import 'package:flutter/material.dart';
-//import 'package:dollar/icons/dollar_icons.dart';
+import 'package:flutter/rendering.dart';
+import 'package:jumping_bottom_nav_bar/jumping_bottom_nav_bar.dart';
+
+// class Destination {
+//   const Destination(this.title, this.icon, this.color);
+//   final String title;
+//   final IconData icon;
+//   final MaterialColor color;
+// }
+
+// const List<Destination> allDestinations = <Destination>[
+//   Destination('Рейтинг', Icons.dehaze, Colors.teal),
+//   Destination('Достижения', Icons.star_border, Colors.cyan),
+//   Destination('Профиль', Icons.account_circle, Colors.orange)
+// ];
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,58 +21,53 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Rating',
-      style: optionStyle,
-    ),
-    Text(
-      'Achivment',
-      style: optionStyle,
-    ),
-    Text(
-      'Profile',
-      style: optionStyle,
-    ),
-  ];
+  int selectedIndex = 1;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  void onChangeTab(int index) {
+    selectedIndex = index;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-     appBar: AppBar(
-        title: Center(child: Text('Sypexx')),
-        automaticallyImplyLeading: false,
-      ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Bottom Bar Page"),
+        ),
+        body: TabBarView(
+          children: [
+            new Container(
+              color: Colors.white,
+            ),
+            new Container(
+              color: Colors.white,
+              child: Center(child: Text('asddasasddas'),),
+            ),
+            new Container(
+              color: Colors.white,
+            ),
+          ],
+        ),
+        bottomNavigationBar: 
+        JumpingTabBar(
+          onChangeTab: onChangeTab,
+          backgroundColor: Colors.blue,
+          circleGradient: LinearGradient(
+            colors: [
+              Colors.black,
+              Colors.black,
+            ],
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
+          items: [
+            TabItemIcon(iconData: Icons.healing, curveColor: Colors.white,),
+            TabItemIcon(iconData: Icons.healing, curveColor: Colors.white),
+            TabItemIcon(iconData: Icons.location_on, curveColor: Colors.white),
+          ],
+          selectedIndex: selectedIndex,
+        ),
       ),
     );
   }
