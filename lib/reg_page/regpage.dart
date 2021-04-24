@@ -1,6 +1,7 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:mpitapk/mainapp/menupage.dart';
 
 class RegPage extends StatefulWidget {
   @override
@@ -14,61 +15,61 @@ final emailController = TextEditingController();
 final passwordController = TextEditingController();
 
 void Registration(BuildContext context) async {
-  // String name1 = nameController.text;
-  // String email1 = emailController.text;
-  // String pass1 = passwordController.text;
-  // var url = 'https://tutycashapi.herokuapp.com/users';
-  // var response = await http.post(uri,
-  //     body: {'name': '$name1', 'email': '$email1', 'password': '$pass1'});
-  // print('Response status: ${response.statusCode}');
-  // print('Response body: ${response.body}');
+  String name1 = nameController.text;
+  String email1 = emailController.text;
+  String pass1 = passwordController.text;
+  var url = Uri.parse('https://tutycashapi.herokuapp.com/users');
+  var response = await http.post(url,
+      body: {'name': '$name1', 'email': '$email1', 'password': '$pass1'});
+  print('Response status: ${response.statusCode}');
+  print('Response body: ${response.body}');
 
-  // if (response.statusCode == 200) {
-  //   _scaffoldKey.currentState.showSnackBar(SnackBar(
-  //     duration: Duration(seconds: 4),
-  //     content: Row(
-  //       children: <Widget>[
-  //         CircularProgressIndicator(),
-  //         Text("  Signing-In...")
-  //       ],
-  //     ),
-  //   ));
-  //   // Navigator.pushReplacement(
-  //   //   context,
-  //   //   MaterialPageRoute(builder: (context) => HomePage()),
-  //   // );
-  // } else
-  //   showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) {
-  //         return AlertDialog(
-  //           title: Text('Ошибка'),
-  //           content: Text('Пользователь уже зарегистрирован'),
-  //           actions: <Widget>[
-  //             FlatButton(
-  //               child: Text('Закрыть'),
-  //               onPressed: () {
-  //                 Navigator.of(context).pop();
-  //               },
-  //             )
-  //           ],
-  //         );
-  //       });
+  if (response.statusCode == 200) {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      duration: Duration(seconds: 4),
+      content: Row(
+        children: <Widget>[
+          CircularProgressIndicator(),
+          Text("  Signing-In...")
+        ],
+      ),
+    ));
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
+    );
+  } else
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Ошибка'),
+            content: Text('Пользователь уже зарегистрирован'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Закрыть'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
 }
 
 class _RegPageState extends State<RegPage> {
   @override
-  // void dispose() {
-  //   nameController.dispose();
-  //   emailController.dispose();
-  //   passwordController.dispose();
-  //   super.dispose();
-  // }
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        //resizeToAvoidBottomPadding: false,
+        resizeToAvoidBottomInset: false,
         body: Center(
             child: Container(
                 child: Column(children: <Widget>[

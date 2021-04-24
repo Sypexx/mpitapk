@@ -14,15 +14,15 @@ class _HomePageState extends State<HomePage> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
-      'Index 0: Home',
+      'Rating',
       style: optionStyle,
     ),
     Text(
-      'Index 1: Business',
+      'Achivment',
       style: optionStyle,
     ),
     Text(
-      'Index 2: School',
+      'Profile',
       style: optionStyle,
     ),
   ];
@@ -37,7 +37,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
      appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
+        title: Center(child: Text('Sypexx')),
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

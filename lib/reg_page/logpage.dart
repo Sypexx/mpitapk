@@ -1,6 +1,7 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:mpitapk/mainapp/menupage.dart';
 
 class LogPage extends StatefulWidget {
   @override
@@ -13,45 +14,45 @@ final emailController = TextEditingController();
 final passwordController = TextEditingController();
 
 void Auth(BuildContext context) async {
-  // String email1 = emailController.text;
-  // String pass1 = passwordController.text;
-  // var url = 'https://tutycashapi.herokuapp.com/users/login';
-  // var response =
-  //     await http.post(url, body: {'email': '$email1', 'password': '$pass1'});
-  // print('Response status: ${response.statusCode}');
-  // print('Response body: ${response.body}');
+  String email1 = emailController.text;
+  String pass1 = passwordController.text;
+  var url = Uri.parse('https://herokuapp.com/users/login');
+  var response =
+      await http.post(url, body: {'email': '$email1', 'password': '$pass1'});
+  print('Response status: ${response.statusCode}');
+  print('Response body: ${response.body}');
 
-  // if (response.statusCode == 200) {
-  //   _scaffoldKey.currentState.showSnackBar(SnackBar(
-  //     duration: Duration(seconds: 4),
-  //     content: Row(
-  //       children: <Widget>[
-  //         CircularProgressIndicator(),
-  //         Text("  Signing-In...")
-  //       ],
-  //     ),
-  //   ));
-  //   // Navigator.pushReplacement(
-  //   //   context,
-  //   //   MaterialPageRoute(builder: (context) => HomePage()),
-  //   // );
-  // } else
-  //   showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) {
-  //         return AlertDialog(
-  //           title: Text('Ошибка'),
-  //           content: Text('Почта или пароль были введены неверно'),
-  //           actions: <Widget>[
-  //             FlatButton(
-  //               child: Text('Закрыть'),
-  //               onPressed: () {
-  //                 Navigator.of(context).pop();
-  //               },
-  //             )
-  //           ],
-  //         );
-  //       });
+  if (response.statusCode == 200) {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      duration: Duration(seconds: 4),
+      content: Row(
+        children: <Widget>[
+          CircularProgressIndicator(),
+          Text("  Signing-In...")
+        ],
+      ),
+    ));
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
+    );
+  } else
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Ошибка'),
+            content: Text('Почта или пароль были введены неверно'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Закрыть'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
 }
 
 class _LogPageState extends State<LogPage> {
@@ -59,17 +60,17 @@ class _LogPageState extends State<LogPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        //resizeToAvoidBottomPadding: false,
+        resizeToAvoidBottomInset: false,
         body: Center(
             child: Container(
-                // decoration: BoxDecoration(
-                //     gradient: LinearGradient(
-                //         begin: Alignment.topLeft,
-                //         end: Alignment.bottomRight,
-                //         colors: [
-                //       Color.fromRGBO(107, 129, 238, 1),
-                //       Color.fromRGBO(54, 78, 155, 1)
-                //     ])),
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                      Color.fromRGBO(107, 129, 238, 1),
+                      Color.fromRGBO(54, 78, 155, 1)
+                    ])),
                 child: Column(children: <Widget>[
           Container(
             width: MediaQuery.of(context).size.width,
