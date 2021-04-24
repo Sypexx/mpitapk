@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:jumping_bottom_nav_bar/jumping_bottom_nav_bar.dart';
+import 'package:mpitapk/tabs/profile.dart';
+import 'package:mpitapk/widgets/drawer.dart';
 
 // class Destination {
 //   const Destination(this.title, this.icon, this.color);
@@ -32,27 +34,24 @@ class _HomePageState extends State<HomePage> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: AppBar(
-          title: Text("Bottom Bar Page"),
+        drawer: CustomDrawer(),
+        backgroundColor: Color.fromRGBO(31, 118, 186, 1),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(50),
+          child: AppBar(
+            actions: [Icon(Icons.settings)],
+            centerTitle: true,
+            title: Image.asset('assets/images/Search.png'),
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+          ),
         ),
         body: TabBarView(
-          children: [
-            new Container(
-              color: Colors.white,
-            ),
-            new Container(
-              color: Colors.white,
-              child: Center(child: Text('asddasasddas'),),
-            ),
-            new Container(
-              color: Colors.white,
-            ),
-          ],
+          children: [Profile(), Profile(), Profile()],
         ),
-        bottomNavigationBar: 
-        JumpingTabBar(
+        bottomNavigationBar: JumpingTabBar(
           onChangeTab: onChangeTab,
-          backgroundColor: Colors.blue,
+          backgroundColor: Color.fromRGBO(31, 118, 186, 1),
           circleGradient: LinearGradient(
             colors: [
               Colors.black,
@@ -62,9 +61,13 @@ class _HomePageState extends State<HomePage> {
             end: Alignment.topRight,
           ),
           items: [
-            TabItemIcon(iconData: Icons.healing, curveColor: Colors.white,),
-            TabItemIcon(iconData: Icons.healing, curveColor: Colors.white),
-            TabItemIcon(iconData: Icons.location_on, curveColor: Colors.white),
+            TabItemIcon(
+              iconData: Icons.person_search,
+              curveColor: Colors.white,
+            ),
+            TabItemIcon(iconData: Icons.star_border, curveColor: Colors.white),
+            TabItemIcon(
+                iconData: Icons.account_circle, curveColor: Colors.white),
           ],
           selectedIndex: selectedIndex,
         ),
