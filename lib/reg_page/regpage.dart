@@ -13,14 +13,20 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 final nameController = TextEditingController();
 final emailController = TextEditingController();
 final passwordController = TextEditingController();
+final nicknameController = TextEditingController();
 
 void Registration(BuildContext context) async {
-  String name1 = nameController.text;
-  String email1 = emailController.text;
-  String pass1 = passwordController.text;
+  String firstName = nameController.text;
+  String secondName = emailController.text;
+  String password = passwordController.text;
+  String nickName = nicknameController.text;
   var url = Uri.parse('https://mpitback.herokuapp.com/users/register');
-  var response = await http.post(url,
-      body: {'firstName': '$name1', 'username': '$email1', 'password': '$pass1', 'lastName': 'lalka'});
+  var response = await http.post(url, body: {
+    'firstName': '$firstName',
+    'lastName': '$secondName',
+    'username': '$nickName',
+    'password': '$password'
+  });
   print('Response status: ${response.statusCode}');
   print('Response body: ${response.body}');
 
@@ -59,12 +65,6 @@ void Registration(BuildContext context) async {
 
 class _RegPageState extends State<RegPage> {
   @override
-  void dispose() {
-    nameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +75,7 @@ class _RegPageState extends State<RegPage> {
                 child: Column(children: <Widget>[
           Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.5,
+            height: MediaQuery.of(context).size.height * 0.4,
             child: Container(
               margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.2),
               child: Image.asset('assets/images/Logo.png'),
@@ -93,7 +93,7 @@ class _RegPageState extends State<RegPage> {
                   height: MediaQuery.of(context).size.width * 0.1,
                   width: MediaQuery.of(context).size.width,
                   margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.width * 0.05,
+                    top: MediaQuery.of(context).size.width * 0.01,
                     left: MediaQuery.of(context).size.width * 0.1,
                     right: MediaQuery.of(context).size.width * 0.1,
                   ),
@@ -187,7 +187,50 @@ class _RegPageState extends State<RegPage> {
                             borderSide: BorderSide(
                                 width: 3,
                                 color: Color.fromRGBO(76, 117, 184, 1))),
-                        labelText: 'E-mail',
+                        labelText: 'Фамилия',
+                        labelStyle:
+                            TextStyle(color: Color.fromRGBO(76, 117, 184, 1))),
+                  )),
+              Container(
+                  height: 40,
+                  margin: EdgeInsets.only(
+                    top: 20,
+                    left: MediaQuery.of(context).size.width * 0.1,
+                    right: MediaQuery.of(context).size.width * 0.1,
+                  ),
+                  child: TextField(
+                    controller: nicknameController,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromRGBO(76, 117, 184, 1),
+                                width: 3)),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide: BorderSide(
+                              width: 3, color: Color.fromRGBO(76, 117, 184, 1)),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide: BorderSide(
+                              width: 3, color: Color.fromRGBO(76, 117, 184, 1)),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide: BorderSide(
+                              width: 3, color: Color.fromRGBO(76, 117, 184, 1)),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(4)),
+                            borderSide: BorderSide(
+                                width: 3,
+                                color: Color.fromRGBO(76, 117, 184, 1))),
+                        focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(4)),
+                            borderSide: BorderSide(
+                                width: 3,
+                                color: Color.fromRGBO(76, 117, 184, 1))),
+                        labelText: 'Ник',
                         labelStyle:
                             TextStyle(color: Color.fromRGBO(76, 117, 184, 1))),
                   )),
@@ -231,48 +274,6 @@ class _RegPageState extends State<RegPage> {
                                 width: 3,
                                 color: Color.fromRGBO(76, 117, 184, 1))),
                         labelText: 'Пароль',
-                        labelStyle:
-                            TextStyle(color: Color.fromRGBO(76, 117, 184, 1))),
-                  )),
-              Container(
-                  height: 40,
-                  margin: EdgeInsets.only(
-                    top: 20,
-                    left: MediaQuery.of(context).size.width * 0.1,
-                    right: MediaQuery.of(context).size.width * 0.1,
-                  ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromRGBO(76, 117, 184, 1),
-                                width: 3)),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide: BorderSide(
-                              width: 3, color: Color.fromRGBO(76, 117, 184, 1)),
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          borderSide: BorderSide(
-                              width: 3, color: Color.fromRGBO(76, 117, 184, 1)),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          borderSide: BorderSide(
-                              width: 3, color: Color.fromRGBO(76, 117, 184, 1)),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(4)),
-                            borderSide: BorderSide(
-                                width: 3,
-                                color: Color.fromRGBO(76, 117, 184, 1))),
-                        focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(4)),
-                            borderSide: BorderSide(
-                                width: 3,
-                                color: Color.fromRGBO(76, 117, 184, 1))),
-                        labelText: 'Подтвердите пароль',
                         labelStyle:
                             TextStyle(color: Color.fromRGBO(76, 117, 184, 1))),
                   )),

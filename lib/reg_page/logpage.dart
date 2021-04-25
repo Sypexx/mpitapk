@@ -10,28 +10,19 @@ class LogPage extends StatefulWidget {
 
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-final emailController = TextEditingController();
+final nicknameController = TextEditingController();
 final passwordController = TextEditingController();
 
 void Auth(BuildContext context) async {
-  String email1 = emailController.text;
+  String nickname = nicknameController.text;
   String pass1 = passwordController.text;
   var url = Uri.parse('https://mpitback.herokuapp.com/users/authenticate');
-  var response =
-      await http.post(url, body: {'username': '$email1', 'password': '$pass1'});
+  var response = await http
+      .post(url, body: {'username': '$nickname', 'password': '$pass1'});
   print('Response status: ${response.statusCode}');
   print('Response body: ${response.body}');
 
   if (response.statusCode == 200) {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
-      duration: Duration(seconds: 4),
-      content: Row(
-        children: <Widget>[
-          CircularProgressIndicator(),
-          Text("  Signing-In...")
-        ],
-      ),
-    ));
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => HomePage()),
@@ -42,7 +33,7 @@ void Auth(BuildContext context) async {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Ошибка'),
-            content: Text('Почта или пароль были введены неверно'),
+            content: Text('Логин или пароль были введены неверно'),
             actions: <Widget>[
               FlatButton(
                 child: Text('Закрыть'),
@@ -59,22 +50,13 @@ class _LogPageState extends State<LogPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _scaffoldKey,
         resizeToAvoidBottomInset: false,
         body: Center(
             child: Container(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                      Color.fromRGBO(107, 129, 238, 1),
-                      Color.fromRGBO(54, 78, 155, 1)
-                    ])),
                 child: Column(children: <Widget>[
           Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.5,
+            height: MediaQuery.of(context).size.height * 0.4,
             child: Container(
               margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.2),
               child: Image.asset('assets/images/Logo.png'),
@@ -111,7 +93,7 @@ class _LogPageState extends State<LogPage> {
                     right: MediaQuery.of(context).size.width * 0.1,
                   ),
                   child: TextField(
-                    controller: emailController,
+                    controller: nicknameController,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -142,7 +124,7 @@ class _LogPageState extends State<LogPage> {
                             borderSide: BorderSide(
                                 width: 3,
                                 color: Color.fromRGBO(76, 117, 184, 1))),
-                        labelText: 'Почта',
+                        labelText: 'Ник',
                         labelStyle:
                             TextStyle(color: Color.fromRGBO(76, 117, 184, 1))),
                   )),

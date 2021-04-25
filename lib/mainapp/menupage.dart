@@ -2,20 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:jumping_bottom_nav_bar/jumping_bottom_nav_bar.dart';
 import 'package:mpitapk/tabs/profile.dart';
+import 'package:mpitapk/tabs/favorite.dart';
+import 'package:mpitapk/tabs/ratings.dart';
 import 'package:mpitapk/widgets/drawer.dart';
-
-// class Destination {
-//   const Destination(this.title, this.icon, this.color);
-//   final String title;
-//   final IconData icon;
-//   final MaterialColor color;
-// }
-
-// const List<Destination> allDestinations = <Destination>[
-//   Destination('Рейтинг', Icons.dehaze, Colors.teal),
-//   Destination('Достижения', Icons.star_border, Colors.cyan),
-//   Destination('Профиль', Icons.account_circle, Colors.orange)
-// ];
 
 class HomePage extends StatefulWidget {
   @override
@@ -47,7 +36,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         body: TabBarView(
-          children: [Profile(), Profile(), Profile()],
+          children: [Ratings(), Favorite(), Profile()],
         ),
         bottomNavigationBar: JumpingTabBar(
           onChangeTab: onChangeTab,

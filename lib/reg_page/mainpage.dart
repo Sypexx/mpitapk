@@ -1,7 +1,6 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:mpitapk/mainapp/menupage.dart';
-
 import 'logpage.dart';
 import 'regpage.dart';
 
@@ -18,15 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(children: <Widget>[
         Container(
           width: MediaQuery.of(context).size.width,
-          // decoration: BoxDecoration(
-          //     gradient: LinearGradient(
-          //         begin: Alignment.topLeft,
-          //         end: Alignment.bottomRight,
-          //         colors: [
-          //       Color.fromRGBO(107, 129, 238, 1),
-          //       Color.fromRGBO(54, 78, 155, 1)
-          //     ])),
-          height: MediaQuery.of(context).size.height * 0.5,
+          height: MediaQuery.of(context).size.height * 0.4,
           child: Container(
             margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.2),
             child: Image.asset('assets/images/Logo.png'),
@@ -49,10 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Color.fromRGBO(76, 117, 184, 1),
               onPressed: () {
                 Navigator.pushNamed(context, '/LogPage');
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LogPage()),
-                );
               },
           )),
         Container(
@@ -71,10 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Text('Регистрация',
                   style: TextStyle(color: Colors.black, fontSize: 20)),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => RegPage()),
-                );
+                Navigator.pushNamed(context, '/RegPage');
               },
             )),
         Container(

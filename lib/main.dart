@@ -1,4 +1,3 @@
-//import 'package:dollar/game/levelselect.dart';
 import 'package:flutter/material.dart';
 import 'mainapp/menupage.dart';
 import 'reg_page/logpage.dart';
